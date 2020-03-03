@@ -1,11 +1,11 @@
 // boki trójkąta
-//a = 3;
-b = 4;
-c = 5;
-h = 7
+let x = 3;
+let y = 4;
+let z = 5;
 
+const heron = (a, b, c, p) => Math.sqrt(p * (p - a) * (p - b) * (p - c));
 // Pole trókąta o bokach ..., ... oraz ... wynosi ... .
 
-let a = () => "aaaa";
+let area = (a, b, c) => `Pole trójkąta o bokach ${a}, ${b} oraz ${c} wynosi: ` + heron(a, b, c, (a+b+c) / 2);
 
-console.log( a() );
+console.log( area(x, y, z) );

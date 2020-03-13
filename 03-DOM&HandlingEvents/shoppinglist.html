@@ -9,7 +9,7 @@
 <body>
     <h1>Shopping List</h1>
     <p>
-        New item: <input type="text" name="item">
+        New item: <input type="text" name="item" id="item">
         <button type="button">Add</button>
     </p>
     <h3>List of items</h3>
@@ -19,9 +19,16 @@
         <li>bread</li>
     </ol>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script>
-    	// a JavaScript code here ...
+        $("button").click(function () {
+            $("ol").append("<li>" + document.getElementById("item").value + "</li>");
+        });
 
+        $("ol").on("dblclick", "li", function () {
+            $(this).remove();
+        });
     </script>
 </body>
 

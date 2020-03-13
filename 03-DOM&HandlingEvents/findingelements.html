@@ -2,6 +2,7 @@
 
 <head>
     <title>Finding elements</title>
+    <meta charset="UTF-8" />
 </head>
 
 <body>
@@ -11,8 +12,13 @@
     <p>Find elements by tag name</p>
 
     <script>
-        // a JavaScript code here ...
-
+        console.log(document.getElementsByTagName('h1')[0].innerHTML);
+        console.log(document.getElementById("someTest").innerHTML);
+        console.log(document.getElementsByClassName('important')[0].innerHTML);
+        Array.prototype.forEach.call(document.getElementsByTagName('p') , function(el) {
+            console.log(el.innerHTML);
+        });
+        
     </script>
 </body>
 

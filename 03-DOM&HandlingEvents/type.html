@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Typing test</title>
-		<meta charset="UTF-8">
-	</head>
-	<body>
-		<h1>How fast are your fingers?</h1>
-		<h3>You have 30 seconds. Just start typing...</h3>
-		<p>Nam strzelać nie kazano. - Wstąpiłem na działo<br>
+
+<head>
+	<title>Typing test</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+
+	<h1>How fast are your fingers?</h1>
+	<h3>You have 30 seconds. Just start typing...</h3>
+	<p>Nam strzelać nie kazano. - Wstąpiłem na działo<br>
 		I spójrzałem na pole; dwieście armat grzmiało.<br>
 		Artyleryi ruskiej ciągną się szeregi,<br>
 		Prosto, długo, daleko, jako morza brzegi;<br>
@@ -19,13 +22,50 @@
 		Czarne chorągwie na śmierć prowadzą zastępy.<br>
 		Przeciw nim sterczy biała, wąska, zaostrzona,<br>
 		Jak głaz bodzący morze, reduta Ordona.</p>
-		
-		<textarea rows="15" cols="50"></textarea><br>
-		
-		<script>
-			// a JavaScript code here ...
-			
-		</script>
-		
-	</body>
+
+	<textarea rows="15" cols="50" oninput="startTimer()"></textarea><br>
+	<span id="timer"></span>
+
+	<script>
+		var count = 30;
+		var started = false;
+		let counter;
+
+		function startTimer() {
+			if (!started) {
+				counter = setInterval(countdown, 1000);
+				started = true;
+			}
+		}
+
+		function countdown() {
+
+			count = count - 1;
+			if (count <= 0) {
+				clearInterval(counter);
+				document.getElementById("timer").innerHTML = "Finished";
+				setResults();
+				return;
+			}
+
+			document.getElementById("timer").innerHTML = "Time left " + count + " secs";
+
+		}
+		function setResults() {
+			let textArea = document.querySelector("textarea").value;
+			let words = textArea.split(" ").length;
+			let chars = textArea.trim().length;
+
+			let resultWords = document.createElement("p");
+			let resultChars = document.createElement("p");
+			resultWords.innerHTML = `Words count: ${words}`;
+			resultChars.innerHTML = `Characters count: ${chars}`;
+			document.body.appendChild(resultWords);
+			document.body.appendChild(resultChars);
+			textArea.value = "";
+		}
+	</script>
+
+</body>
+
 </html>

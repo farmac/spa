@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+	To run this code, you will need a HTTP server, because most web browsers do not allow making 
+	requests to local resources.
+
+	With Python installed, it's as simple as that:
+	python -m SimpleHTTPServer
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>surname</th>
+                <th>age</th>
+                <th>country</th>
+                <th>email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "./people.json",
+                    "dataSrc": ''
+                },
+                "columns": [
+                    { "data": "name" },
+                    { "data": "surname" },
+                    { "data": "age" },
+                    { "data": "country" },
+                    { "data": "email" }
+                ]
+            }
+            );
+        });
+
+    </script>
+
+</body>
+
+</html>

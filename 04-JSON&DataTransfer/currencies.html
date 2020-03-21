@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Exchange Rates</title>
+</head>
+
+<body>
+    <h1>PLN Current Exchange Rate</h1>
+    <p id="eur"></p>
+    <p id="usd"></p>
+    <p id="gbp"></p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("p").forEach(elem => {
+                getExchangeRate(elem);
+            });
+        });
+
+        const getExchangeRate = (currency) => {
+            fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${currency.id}/?format=json`)
+                .then(request => request.json())
+                .then(data => currency.innerHTML = `1 ${data.currency} (${data.code}) = ${data.rates[0].mid} PLN`);
+        };
+    </script>
+</body>
+
+</html>

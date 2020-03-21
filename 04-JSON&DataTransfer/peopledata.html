@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+	To run this code, you will need a HTTP server, because most web browsers do not allow making 
+	requests to local resources.
+
+	With Python installed, it's as simple as that:
+	python -m SimpleHTTPServer
+-->
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <input type="button" value="Display data">
+    <ol></ol>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("input").onclick = loadPeople;
+        });
+
+        const loadPeople = () => {
+            $.ajax({
+                url: "./people.json", success: (result) => {
+                    result.forEach(element => {
+                        let name = element.name;
+                        let surname = element.surname.toUpperCase();
+                        let country = element.country;
+
+                        $("body ol").append(`<li>${name} ${surname}, ${country}</li>`);
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

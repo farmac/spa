@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Gold Chart</title>
+
+    <style>
+        canvas {
+            max-height: 520px !important;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Gold price in PLN</h1>
+    <canvas id="myChart"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Gold price',
+                    borderColor: 'rgb(0, 0, 0)',
+                    backgroundColor: 'rgb(0,120,180)',
+                    data: []
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        fetch('https://api.nbp.pl/api/cenyzlota/last/10/?format=json')
+            .then(req => req.json())
+            .then(data => data.forEach(element => {
+                chart.data.labels.push(element.data);
+                chart.data.datasets[0].data.push(element.cena);
+                chart.update();
+            }));
+
+    </script>
+</body>
+
+</html>

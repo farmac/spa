@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
+
 <body>
+  <div id="app">
+    <canvas id="myChart"></canvas>
+  </div>
+
   <script>
     var app = new Vue({
       el: '#app',
       data: {
-        films: [
+        languages: [
           {
             language: 'Python',
             popularity: 25.95
@@ -29,9 +36,47 @@
             language: 'Php',
             popularity: 7.37
           }
-        ] 
-      }
+        ],
+        chart: null
+      },
+      mounted() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        this.chart = new Chart(ctx, {
+          type: 'bar',
+
+          data: {
+            labels: [],
+            datasets: [{
+              label: 'Popularity',
+              borderColor: 'rgb(0, 0, 0)',
+              backgroundColor: 'rgb(0,120,180)',
+              data: []
+            }]
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      },
+      methods: {
+        setData: function () {
+          this.languages.forEach(element => {
+            this.chart.data.labels.push(element.language);
+            this.chart.data.datasets[0].data.push(element.popularity);
+            this.chart.update();
+          })
+        }
+      },
     });
+
+    app.setData();
   </script>
 </body>
+
 </html>

@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
-  <h1>Grades</h1>    
+  <div id="app">
+    <p><b>RECEIPT</b></p>
+    <p>-----------------</p>
+    <p>Product: {{ product.name }}</p>
+    <p>Unit Price: {{ product.unitPrice }} zł</p>
+    <p>Quantity: {{ product.quantity }}</p>
+    <p>Amount: {{ amount }}</p>
+    <p>VAT Tax Rate: {{ product.VAT }}%</p>
+    <p>==============</p>
+    <p><b>Total: {{ total }} zł</b></p>
+  </div>
+
 
   <script>
     var app = new Vue({
@@ -12,13 +25,23 @@
       data: {
         product: {
           name: 'book',
-          unitPrice: 17.5,
+          unitPrice: 17,
           quantity: 3,
           VAT: 23
         }
+      },
+      computed: {
+        amount: function () {
+          return this.product.unitPrice * this.product.quantity;
+        },
+        total: function () {
+          return this.product.unitPrice * this.product.quantity * ((1 + this.product.VAT) / 100);
+        }
+
       }
     });
   </script>
 
 </body>
+
 </html>

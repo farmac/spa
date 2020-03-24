@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Courses</h1>
+        <input type="checkbox" id="amal" value="amal" v-model="checkedCourses">
+        <label for="amal">Analiza matematyczna i algebra liniowa</label><br>
+        <input type="checkbox" id="dpto" value="dpto" v-model="checkedCourses">
+        <label for="dpto">Dobre praktyki tworzenia oprogramowania</label><br>
+        <input type="checkbox" id="economy" value="economy" v-model="checkedCourses">
+        <label for="economy">Ekonomia</label><br>
+        <input type="checkbox" id="pp" value="pp" v-model="checkedCourses">
+        <label for="pp">Pracownia programowania</label><br>
+        <input type="checkbox" id="wsi" value="wsi" v-model="checkedCourses">
+        <label for="wsi">Wstęp do systemów informacyjnych</label><br><br>
+        <span>Number of checked courses: {{ checkedCourses.length }}</span>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                checkedCourses: []
+            }
+        });
+    </script>
+
+</body>
+
+</html>

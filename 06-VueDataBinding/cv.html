@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span>Name:</span>
+        <input type="text" v-model="person.name"><br><br>
+        <span>Surname:</span>
+        <input type="text" v-model="person.surname"><br><br>
+
+        <span>Gender: </span><br>
+        <input type="radio" id="m" value="male" v-model="person.gender">
+        <label for="m">male</label>
+        <br>
+        <input type="radio" id="f" value="female" v-model="person.gender">
+        <label for="f">female</label>
+        <br><br>
+        <span>Education</span><br>
+        <select v-model="person.education">
+            <option disabled value="">Please select one</option>
+            <option>None</option>
+            <option>Secondary</option>
+            <option>Higher</option>
+        </select>
+        <br><br>
+        <span>Skills:</span><br>
+        <input type="checkbox" id="cs" value="Computer skills" v-model="person.skills">
+        <label for="cs">Computer skills</label><br>
+        <input type="checkbox" id="dl" value="Driver license" v-model="person.skills">
+        <label for="dl">Driver license</label><br>
+        <input type="checkbox" id="cr" value="Creativity" v-model="person.skills">
+        <label for="cr">Creativity</label><br>
+        <input type="checkbox" id="tw" value="Teamwork" v-model="person.skills">
+        <label for="tw">Teamwork</label><br><br>
+        <button @click="persist">Save</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                person: {
+                    name: '',
+                    surname: '',
+                    gender: '',
+                    education: '',
+                    skills: []
+                }
+            }, mounted() {
+                let temp = JSON.parse(localStorage.getItem('person'));
+                if (temp.name) this.person.name = temp.name;
+                if (temp.surname) this.person.surname = temp.surname;
+                if (temp.gender) this.person.gender = temp.gender;
+                if (temp.education) this.person.education = temp.education;
+                if (temp.skills) this.person.skills = temp.skills;
+            }, methods: {
+                persist: function () {
+                    localStorage.setItem('person', JSON.stringify(this.person));
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

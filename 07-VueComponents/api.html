@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <div id="app">
+        <corona></corona>
+    </div>
+
+    <script>
+        Vue.component('corona', {
+            data: function () {
+                return {
+                    stats: []
+                }
+            },
+            mounted() {
+                fetch('https://api.covid19api.com/summary')
+                .then(req => req.json())
+                .then(data => {
+                    this.stats = data;
+                })
+            },
+            template:
+                `<div>
+                    <h1>Coronavirus statistics</h1>
+                    <ul>
+                        <li v-for="(value, name) in stats.Global">
+                            {{ name }}: {{ value }}
+                        </li>
+                    </ul>
+                    <p>Date: {{ stats.Date }}</p>
+                </div>`
+
+        });
+
+        new Vue({
+            el: '#app'
+        });
+
+    </script>
+</body>
+
+
+</html>

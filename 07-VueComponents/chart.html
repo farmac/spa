@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <chart chart-name="myChart" numbers="2 6 8 4 5 1"></chart>
+    </div>
+
+    <script>
+        Vue.component('chart', {
+            props: ['numbers', 'chart-name'],
+            template: `<canvas id="${this.chart-name}" width="400px" height="150px"></canvas>`,
+            mounted() {
+                var ctx = document.getElementById(this.chart-name).getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Niedostateczny', 'Dopuszczający', 'Dostateczny', 'Dobry', 'Bardzo dobry', 'Celujący'],
+                        datasets: [{
+                            label: 'Liczba uczniów, która otrzymała daną ocene',
+                            data: [],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                this.numbers.split(" ").forEach(element => {
+                    chart.data.datasets[0].data.push(element);
+                    chart.update();
+                });
+            }
+        });
+
+        new Vue({
+            el: '#app'
+        });
+
+    </script>
+</body>
+
+
+</html>

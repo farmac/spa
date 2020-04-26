@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <movie-seven></movie-seven> <br>
+    <movie-non-stop></movie-non-stop> <br>
+    <movie-taken></movie-taken>
+
+  </div>
+
+  <script>
+    Vue.component('movie-seven', {
+      data: function () {
+        return {
+          title: 'Seven',
+          director: 'David Fincher',
+          yearOfProduction: 1995
+        }
+      },
+      template: '<span>Title: {{ title }}, director: {{ director }}, year of production: {{ yearOfProduction }}</span>'
+    });
+
+    Vue.component('movie-non-stop', {
+      data: function () {
+        return {
+          title: 'Non-Stop',
+          director: 'Jaume Collet-Serra',
+          yearOfProduction: 2014
+        }
+      },
+      template: '<span>Title: {{ title }}, director: {{ director }}, year of production: {{ yearOfProduction }}</span>'
+    });
+
+    Vue.component('movie-taken', {
+      data: function () {
+        return {
+          title: 'Taken',
+          director: 'Pierre Morel',
+          yearOfProduction: 2008
+        }
+      },
+      template: '<span>Title: {{ title }}, director: {{ director }}, year of production: {{ yearOfProduction }}</span>'
+    });
+
+    new Vue({
+      el: '#app'
+    });
+
+  </script>
+</body>
+
+
+</html>

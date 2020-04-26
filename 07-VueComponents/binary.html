@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <binary number="8"></binary>
+    <binary number="170"></binary>
+    <binary number="204"></binary>
+    <binary number="3855"></binary>
+  </div>
+
+  <script>
+    Vue.component('binary', {
+        props: ['number']
+      ,
+      template: '<p>{{ number }}(10) = {{ parseInt(number).toString(2) }}(2)</p>'
+    });
+
+    new Vue({
+      el: '#app'
+    });
+
+  </script>
+</body>
+
+
+</html>

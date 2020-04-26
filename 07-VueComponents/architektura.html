@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <von-neumann-architecture></von-neumann-architecture>
+  </div>
+
+  <script>
+    Vue.component('von-neumann-architecture', {
+      data: function () {
+        return {
+          elements: [
+              'processing units',
+              'control unit',
+              'memory',
+              'external mass storage',
+              'input and output mechanism'
+          ]
+        }
+      },
+      template:
+        `<div>
+          <h2>Von Neumann Architecture</h2>
+          <ul>
+            <li v-for="item in elements">
+                {{ item }}
+            </li>
+          </ul>
+        </div>`
+    });
+
+    new Vue({
+      el: '#app'
+    });
+
+  </script>
+</body>
+
+
+</html>
